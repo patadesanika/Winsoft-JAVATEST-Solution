@@ -1,0 +1,105 @@
+NAME:Sanika Patade
+
+Q1: Merge two arrays by satisfying given constraints
+Given two sorted arrays X[] and Y[] of size m and n each where m >= n and X[] has exactly n vacant cells,
+ merge elements of Y[] in their correct position in array X[], i.e., merge (X, Y) by keeping the sorted order.
+
+For example,
+
+Input: X[] = { 0, 2, 0, 3, 0, 5, 6, 0, 0 }
+Y[] = { 1, 8, 9, 10, 15 } The vacant cells in X[] is represented by 0 
+Output: X[] = { 1, 2, 3, 5, 6, 8, 9, 10, 15 }
+			
+		public void merge(int x[], int m, int y[], int n) {
+   				int p1 = m - 1;
+    				int p2 = n - 1;
+    				int i = m + n - 1;
+    			while (p2 >= 0) {
+        			if (p1 >= 0 && x[p1] > y[p2]) {
+            				x[i--] = x[p1--];
+        			} else {
+            				x[i--] = y[p2--];
+        			}		
+    			}
+		}
+
+		
+
+Q2:Find maximum sum path involving elements of given arrays
+Given two sorted arrays of integers, find a maximum sum path involving elements of both arrays whose sum is maximum. 
+We can start from either array, but we can switch between arrays only through its common elements.
+
+For example,
+
+Input: X = { 3, 6, 7, 8, 10, 12, 15, 18, 100 }
+Y = { 1, 2, 3, 5, 7, 9, 10, 11, 15, 16, 18, 25, 50 }  
+The maximum sum path is: 1 —> 2 —> 3 —> 6 —> 7 —> 9 —> 10 —> 12 —> 15 —> 16 —> 18 —> 100 
+The maximum sum is 199
+
+public static int maxPathSum(int ar1[], int ar2[], int m, int n) {
+        int i = 0;
+	int j = 0;
+        int result = 0, sum1 = 0, sum2 = 0;
+
+        while (i < m && j < n) {
+            if (ar1[i] < ar2[j])
+                sum1 += ar1[i++];
+            else if (ar1[i] > ar2[j])
+                sum2 += ar2[j++];
+            else {
+                result += max(sum1, sum2) + ar1[i];
+                sum1 = 0;
+                sum2 = 0;
+                i++;
+                j++;
+            }
+        }
+
+        while (i < m){
+            sum1 += ar1[i++];
+	}
+        while (j < n){
+            sum2 += ar2[j++];
+	}
+         result += max(sum1, sum2);
+
+        return result;
+    }
+
+
+
+Q3:Write a Java Program to count the number of words in a string using HashMap.
+
+		String str="I am From Pune";
+		Map<String, Integer> hash = new HashMap<>();
+		String arr[]=str.split(" ");
+		for(int i=0;i<arr.length;i++){
+			if(hash.containsKey(arr[i])){
+				hash.put(arr[i],hash.get(arr[i]+1));
+			}else{
+				hash.put(arr[i],1);
+			}
+			System.out.println(hash);
+		}
+
+		
+
+Q4:Write a Java Program to find the duplicate characters in a string.
+
+	public static char DuplicateCharacter(String str) {
+        char[] ch = str.toCharArray();
+        for (int i = 0; i < str.length(); i++) {
+            for (int j = i + 1; j < str.length(); j++) {
+                if (ch[i] == ch[j]) {
+                    return ch[i];
+                }
+            }
+        }
+         return '\0';
+    }
+
+
+
+
+
+
